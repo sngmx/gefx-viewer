@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEXF Viewer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.parsers.gexf.min.js"></script>
+    <script src="/static/sigma-edge-curve.cjs.dev.js"></script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>GEXF Viewer</h1>
+        <div class="upload-section">
+            <form id="upload-form" hx-post="/upload" hx-encoding="multipart/form-data" hx-target="#upload-result"
+                hx-swap="innerHTML">
+                <label for="gexfFile" class="file-upload-label">
+                    <span>Drag & Drop or Click to Upload GEXF File</span>
+                    <input type="file" id="gexfFile" name="gexfFile" accept=".gexf">
+                </label>
+                <button type="submit">View Graph</button>
+            </form>
+        </div>
+
+        <!-- Hidden div to store HTMX response -->
+        <div id="upload-result" style="display: none;"></div>
+
+        <div id="graph-container">
+            <div id="sigma-container">
+                <p>Upload a file to view the graph.</p>
+            </div>
+            <div id="node-info">
+                <p>Click a node to view its details.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load app.js at the end -->
+    <script defer src="/static/app.js"></script>
+</body>
+
+</html>
