@@ -104,13 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Node click event
             s.bind("clickNode", function (event) {
                 const node = event.data.node;
-                document.getElementById("node-info").innerHTML = `
-                    <h3>Node Info</h3>
-                    <p>ID: ${node.id}</p>
-                    <p>Label: ${node.label || "N/A"}</p>
-                    <p>Size: ${node.size}</p>
-                `;
-            });
+                let attributesHtml = "<h3>Node Info</h3>";
+            
+                Object.entries(node).forEach(([key, value]) => {
+                    attributesHtml += `<p><strong>${key}:</strong> ${value}</p>`;
+                });
+            
+                document.getElementById("node-info").innerHTML = attributesHtml;
+            });            
 
             s.bind("clickStage", function () {
                 document.getElementById("node-info").innerHTML = "<p>Click a node to view its details.</p>";
